@@ -17,8 +17,6 @@ public class User
     public string Username { get; set; }
 
     [Required]
-    [MaxLength(101)]
-    [MinLength(8)]
     public string Password { get; set; }
 
     [Required]
@@ -27,4 +25,12 @@ public class User
     [Required]
     [EmailAddress]
     public string Email { get; set; }
+    
+    public List<BorrowRecord> BorrowRecords { get; set; } = [];
+    public List<Comment> Comments { get; set; } = [];
+    // public ICollection<TransactionHistory> UserTransactions { get; set; } = new HashSet<TransactionHistory>();
+    // public ICollection<TransactionHistory> LibrarianTransactions { get; set; } = new HashSet<TransactionHistory>();
+    public List<TransactionHistory> UserHistories { get; set; } = [];
+    public List<TransactionHistory> LibrarianHistories { get; set; } = [];
+
 }

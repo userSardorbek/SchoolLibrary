@@ -6,9 +6,14 @@ using WebApplication1.Mapper;
 namespace WebApplication1.Controller;
 
 [Route("api/user")]
-public class UserController(IUserRepository userRepository) : ControllerBase
+public class UserController : ControllerBase
 {
-    private readonly IUserRepository _userRepository = userRepository;
+    private readonly IUserRepository _userRepository;
+
+    public UserController(IUserRepository userRepository)
+    {
+        _userRepository = userRepository;
+    }
 
     [HttpGet]
     [ProducesDefaultResponseType(typeof(ApiResponse<List<ReturnUserDto>>))]

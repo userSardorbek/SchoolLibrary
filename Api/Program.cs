@@ -18,6 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IUserRepository, UserService>();
+builder.Services.AddScoped<IGenreRepository, GenreService>();
 
 var app = builder.Build();
 
