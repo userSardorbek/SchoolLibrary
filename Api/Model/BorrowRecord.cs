@@ -1,5 +1,8 @@
-﻿namespace WebApplication1.Model;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace WebApplication1.Model;
+
+[Table("borrowRecord")]
 public class BorrowRecord
 {
     public Guid Id { get; set; } = Guid.NewGuid();

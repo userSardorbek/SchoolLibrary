@@ -19,6 +19,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<IUserRepository, UserService>();
 builder.Services.AddScoped<IGenreRepository, GenreService>();
+builder.Services.AddScoped<IBookRepository, BookService>();
 
 var app = builder.Build();
 

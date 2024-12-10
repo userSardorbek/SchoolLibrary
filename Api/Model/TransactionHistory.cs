@@ -2,6 +2,7 @@
 
 namespace WebApplication1.Model;
 
+[Table("transactionHistory")]
 public class TransactionHistory
 {
     public Guid Id { get; set; } = Guid.NewGuid();

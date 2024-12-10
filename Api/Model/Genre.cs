@@ -8,9 +8,9 @@ namespace WebApplication1.Model;
 [Index(nameof(Name), IsUnique = true)]
 public class Genre
 {
-    public int id { get; set; }
+    public int Id { get; set; }
     
-    [Required] 
+    [Required]
     public string Name { get; set; }
 
     public List<BookGenre> BookGenres { get; set; } = [];

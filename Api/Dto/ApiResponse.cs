@@ -34,7 +34,7 @@ public class ApiResponse<T>
     // [JsonPropertyName("code")]
     // public int Code { get; set; }
 }
-public class ApiResponse : ApiResponse<object>
-{
-
-}
+// public class ApiResponse : ApiResponse<object>
+// {
+//
+// }

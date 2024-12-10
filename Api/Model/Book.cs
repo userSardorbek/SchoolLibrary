@@ -19,9 +19,9 @@ public class Book
     public string ISBN { get; set; }
 
     [Required] 
-    public bool Availability { get; set; }
+    public bool Availability { get; set; } = true;
 
     public List<BookGenre> BookGenres { get; set; } = [];
     public List<BorrowRecord> BorrowRecords { get; set; } = [];
-    public List<ActionTransaction> TransactionActions { get; set; } = [];
+    public List<TransactionHistory> TransactionHistories { get; set; } = [];
 }
