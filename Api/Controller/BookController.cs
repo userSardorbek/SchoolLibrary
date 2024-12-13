@@ -37,7 +37,8 @@ public class BookController : ControllerBase
         if (bookDto == null)
             return BadRequest(new ApiResponse<BookDto>("New book not added"));
         if (bookDto.Genres.Count == 0)
-            return CreatedAtAction(nameof(GetBookByBookId), bookCreateDto, new ApiResponse<BookDto>(bookDto) { Error = "Such genres not found, edit your books genres please" });
+            return CreatedAtAction(nameof(GetBookByBookId), bookCreateDto,
+                new ApiResponse<BookDto>(bookDto) { Error = "Such genres not found, edit your books genres please" });
         return CreatedAtAction(nameof(GetBookByBookId), bookCreateDto, new ApiResponse<BookDto>(bookDto));
     }
 
@@ -48,7 +49,18 @@ public class BookController : ControllerBase
     {
         var editedBook = await _bookRepository.EditBook(bookId, bookEditDto);
         if (editedBook == null)
-            return BadRequest(new ApiResponse<BookDto>($"Such book not found"));
+            return BadRequest(new ApiResponse<BookDto>($"Book not found {bookId}"));
         return Ok(new ApiResponse<BookDto>(editedBook));
+    }
+
+    [HttpDelete]
+    [Route("{bookId:Guid}")]
+    [ProducesDefaultResponseType(typeof(ApiResponse<BookDto>))]
+    public async Task<IActionResult> DeleteBook(Guid bookId)
+    {
+        var deleteBook = await _bookRepository.DeleteBook(bookId);
+        if (deleteBook == null)
+            return BadRequest(new ApiResponse<BookDto>($"Book not found {bookId}"));
+        return Accepted(new ApiResponse<BookDto>(deleteBook));
     }
 }

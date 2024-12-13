@@ -8,4 +8,5 @@ public interface IBookRepository
     Task<BookDto?> GetByIdAsync(Guid id);
     Task<BookDto?> CreateBook(BookCreateDto bookCreateDto);
     Task<BookDto?> EditBook(Guid bookId, BookEditDto bookEditDto);
+    Task<BookDto?> DeleteBook(Guid bookId);
 }

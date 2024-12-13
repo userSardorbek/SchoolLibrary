@@ -83,4 +83,14 @@ public class BookService : IBookRepository
 
         return book.BookToBookDto(genresDto);
     }
+
+    public async Task<BookDto?> DeleteBook(Guid bookId)
+    {
+        var bookModel = await _context.Books.FindAsync(bookId);
+        if (bookModel == null)
+            return null;
+        _context.Remove(bookModel);
+        await _context.SaveChangesAsync();
+        return bookModel.BookToBookDto(null);
+    }
 }
