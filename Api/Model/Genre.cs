@@ -9,8 +9,6 @@ namespace WebApplication1.Model;
 public class Genre
 {
     public int Id { get; set; }
-    
-    [Required]
     public string Name { get; set; }
 
     public List<BookGenre> BookGenres { get; set; } = [];

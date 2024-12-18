@@ -7,18 +7,9 @@ namespace WebApplication1.Model;
 public class Book
 {
     public Guid Id { get; set; } = Guid.NewGuid();
-
-    [Required]
     public string Title { get; set; }
-
-    [Required]
     public string Author { get; set; }
-
-    [Required]
-    [Length(minimumLength: 13, maximumLength: 14)]
     public string ISBN { get; set; }
-
-    [Required] 
     public bool Availability { get; set; } = true;
 
     public List<BookGenre> BookGenres { get; set; } = [];
