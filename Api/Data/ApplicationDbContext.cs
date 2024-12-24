@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using WebApplication1.Model;
 
 namespace WebApplication1.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : IdentityDbContext<User>
 {
     public ApplicationDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
     {
@@ -22,7 +23,7 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<BookGenre>(x => x.HasKey(p => new { p.BookId, p.GenreId }));
-
+    
         modelBuilder.Entity<BookGenre>()
             .HasOne(u => u.Book)
             .WithMany(u => u.BookGenres)
@@ -35,7 +36,7 @@ public class ApplicationDbContext : DbContext
         
         
         modelBuilder.Entity<User>()
-            .HasMany(u => u.UserHistories)
+            .HasMany(u => u.UserTransactionHistories)
             .WithOne(t => t.User)
             .HasForeignKey(t => t.UserId);
     }
