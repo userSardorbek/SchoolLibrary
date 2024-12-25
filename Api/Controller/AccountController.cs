@@ -1,18 +1,52 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Dto;
 using WebApplication1.Interfaces;
 using WebApplication1.Mapper;
+using WebApplication1.Model;
 
 namespace WebApplication1.Controller;
 
-[Route("api/user")]
-public class UserController : ControllerBase
+[Route("api/account")]
+[ApiController]
+public class AccountController : ControllerBase
 {
-    private readonly IUserRepository _userRepository;
+    private readonly UserManager<User> _userManager;
 
-    public UserController(IUserRepository userRepository)
+    public AccountController(UserManager<User> userManager)
     {
-        _userRepository = userRepository;
+        _userManager = userManager;
+    }
+
+    [HttpPost("register")]
+    // [ProducesDefaultResponseType(typeof(ApiResponse<>))]
+    public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = new User()
+            {
+                UserName = dto.Username,
+                FullName = dto.FullName,
+                Email = dto.Email
+            };
+
+            var createdUser = await _userManager.CreateAsync(user, dto.Password);
+            if (createdUser.Succeeded)
+            {
+                var roleResult = await _userManager.AddToRoleAsync(user, "Student");
+                return roleResult.Succeeded ? Ok("User created") : StatusCode(500, roleResult.Errors);
+            }
+
+            return StatusCode(500, createdUser.Errors);
+        }
+        catch (Exception e)
+        {
+            return StatusCode(500, e);
+        }
     }
 
 //     [HttpGet]

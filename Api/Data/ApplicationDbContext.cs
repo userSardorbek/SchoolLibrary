@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Model;
 
@@ -22,8 +23,17 @@ public class ApplicationDbContext : IdentityDbContext<User>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        List<IdentityRole> roles = new List<IdentityRole>()
+        {
+            new IdentityRole() { Name = "Admin", NormalizedName = "ADMIN" },
+            new IdentityRole() { Name = "Librarian", NormalizedName = "LIBRARIAN" },
+            new IdentityRole() { Name = "Student", NormalizedName = "STUDENT" },
+        };
+        modelBuilder.Entity<IdentityRole>().HasData(roles);
+
         modelBuilder.Entity<BookGenre>(x => x.HasKey(p => new { p.BookId, p.GenreId }));
-    
+
         modelBuilder.Entity<BookGenre>()
             .HasOne(u => u.Book)
             .WithMany(u => u.BookGenres)
@@ -33,8 +43,8 @@ public class ApplicationDbContext : IdentityDbContext<User>
             .HasOne(u => u.Genre)
             .WithMany(u => u.BookGenres)
             .HasForeignKey(p => p.GenreId);
-        
-        
+
+
         modelBuilder.Entity<User>()
             .HasMany(u => u.UserTransactionHistories)
             .WithOne(t => t.User)

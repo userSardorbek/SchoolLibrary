@@ -28,7 +28,7 @@ public class ApiResponse<T>
     [JsonPropertyName("data")]
     public T Data { get; set; }
     
-    [JsonPropertyName("Error")]
+    [JsonPropertyName("error")]
     public string Error { get; set; }
     
     // [JsonPropertyName("code")]

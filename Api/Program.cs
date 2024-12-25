@@ -21,9 +21,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<IGenreRepository, GenreService>();
-builder.Services.AddScoped<IBookRepository, BookService>();
-
 // Identity
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -37,12 +34,15 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 // Authentication
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = options.DefaultChallengeScheme =
-        options.DefaultForbidScheme = options.DefaultScheme =
-            options.DefaultSignInScheme = options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x =>
+    options.DefaultAuthenticateScheme =
+        options.DefaultChallengeScheme =
+            options.DefaultForbidScheme =
+                options.DefaultScheme =
+                    options.DefaultSignInScheme =
+                        options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(jwtBearerOptions =>
 {
-    x.TokenValidationParameters = new TokenValidationParameters
+    jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
         ValidIssuer = builder.Configuration["JWT:Issuer"],
@@ -54,6 +54,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddScoped<IGenreRepository, GenreService>();
+builder.Services.AddScoped<IBookRepository, BookService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -64,10 +67,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.MapControllers();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.MapControllers();
 
 app.Run();

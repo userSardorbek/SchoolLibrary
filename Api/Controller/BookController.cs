@@ -6,6 +6,7 @@ using WebApplication1.Interfaces;
 namespace WebApplication1.Controller;
 
 [Route("api/book")]
+[ApiController]
 public class BookController(IBookRepository iBookRepository) : ControllerBase
 {
     [HttpGet("bookId:Guid")]
@@ -30,7 +31,7 @@ public class BookController(IBookRepository iBookRepository) : ControllerBase
             return BadRequest(new ApiResponse<BookDto>("New book not added"));
         if (bookDto.Genres.Count == 0)
             return CreatedAtAction(nameof(GetBookByBookId), bookCreateDto,
-                new ApiResponse<BookDto>(bookDto) { Error = "Such genres not found, edit your books genres please" });
+                new ApiResponse<BookDto>(bookDto) { Error = "Such genres not found, edit your book's genres please" });
         return CreatedAtAction(nameof(GetBookByBookId), bookCreateDto, new ApiResponse<BookDto>(bookDto));
     }
 

@@ -10,5 +10,5 @@ public interface IUserRepository
 
     Task<User?> GetUserByIdAsync(Guid userId);
 
-    Task<User> CreateAsync(CreateUserDto userDto);
+    Task<User> CreateAsync(RegisterDto userDto);
 }
