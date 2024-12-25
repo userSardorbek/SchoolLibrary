@@ -7,7 +7,7 @@ using WebApplication1.Model;
 
 namespace WebApplication1.Service;
 
-public class UserService
+public class UserRepository
 {
 
     private readonly ApplicationDbContext _context;

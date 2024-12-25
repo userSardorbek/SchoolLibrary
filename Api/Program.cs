@@ -54,8 +54,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddScoped<IGenreRepository, GenreService>();
-builder.Services.AddScoped<IBookRepository, BookService>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 

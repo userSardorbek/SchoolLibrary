@@ -8,11 +8,11 @@ using WebApplication1.Model;
 
 namespace WebApplication1.Service;
 
-public class BookService : IBookRepository
+public class BookRepository : IBookRepository
 {
     private readonly ApplicationDbContext _context;
 
-    public BookService(ApplicationDbContext context)
+    public BookRepository(ApplicationDbContext context)
     {
         _context = context;
     }

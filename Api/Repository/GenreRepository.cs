@@ -7,11 +7,11 @@ using WebApplication1.Model;
 
 namespace WebApplication1.Service;
 
-public class GenreService : IGenreRepository
+public class GenreRepository : IGenreRepository
 {
     private readonly ApplicationDbContext _context;
 
-    public GenreService(ApplicationDbContext context)
+    public GenreRepository(ApplicationDbContext context)
     {
         _context = context;
     }
