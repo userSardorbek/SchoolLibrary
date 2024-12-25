@@ -19,16 +19,15 @@ public class AccountController : ControllerBase
         _userManager = userManager;
         _tokenService = tokenService;
     }
-    
+
     [HttpPost("register")]
-    // [ProducesDefaultResponseType(typeof(ApiResponse<>))]
+    [ProducesDefaultResponseType(typeof(ApiResponse<NewUserDto>))]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
         try
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var appUser = new User()
             {
                 UserName = registerDto.Username,
@@ -43,24 +42,16 @@ public class AccountController : ControllerBase
                 var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
                 if (roleResult.Succeeded)
                 {
-                    return Ok(
-                        new NewUserDto
-                        {
-                            UserName = appUser.UserName,
-                            Email = appUser.Email,
-                            Token = _tokenService.CreateToken(appUser)
-                        }
-                    );
+                    return Ok(new ApiResponse<NewUserDto>(new NewUserDto()
+                    {
+                        UserName = appUser.UserName, 
+                        Email = appUser.Email, 
+                        Token = _tokenService.CreateToken(appUser)
+                    }));
                 }
-                else
-                {
-                    return StatusCode(500, roleResult.Errors);
-                }
+                return StatusCode(500, new ApiResponse<IEnumerable<IdentityError>>(){ Data = roleResult.Errors, Success = false, Error = "Check data object"});
             }
-            else
-            {
-                return StatusCode(500, createdUser.Errors);
-            }
+            return StatusCode(500, new ApiResponse<IEnumerable<IdentityError>>(){ Data = createdUser.Errors, Success = false, Error = "Check data object"});
         }
         catch (Exception e)
         {
