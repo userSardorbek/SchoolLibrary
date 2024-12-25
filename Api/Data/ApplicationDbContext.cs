@@ -11,7 +11,7 @@ public class ApplicationDbContext : IdentityDbContext<User>
     {
     }
 
-    public DbSet<User> User { get; set; }
+    // public DbSet<User> User { get; set; }
     public DbSet<Book> Books { get; set; }
     public DbSet<Genre> Genres { get; set; }
     public DbSet<BookGenre> BookGenres { get; set; }
@@ -28,7 +28,7 @@ public class ApplicationDbContext : IdentityDbContext<User>
         {
             new IdentityRole() { Name = "Admin", NormalizedName = "ADMIN" },
             new IdentityRole() { Name = "Librarian", NormalizedName = "LIBRARIAN" },
-            new IdentityRole() { Name = "Student", NormalizedName = "STUDENT" },
+            new IdentityRole() { Name = "User", NormalizedName = "USER" },
         };
         modelBuilder.Entity<IdentityRole>().HasData(roles);
 
