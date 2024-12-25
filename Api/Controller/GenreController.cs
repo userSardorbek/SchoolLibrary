@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Dto;
 using WebApplication1.Dto.GenreDto;
 using WebApplication1.Interfaces;
@@ -32,6 +33,7 @@ public class GenreController : ControllerBase
     // }
 
     [HttpGet]
+    [Authorize]
     [Route("id:int")]
     [ProducesDefaultResponseType(typeof(ApiResponse<GenreDto>))]
     public async Task<IActionResult> GetById(int id)
