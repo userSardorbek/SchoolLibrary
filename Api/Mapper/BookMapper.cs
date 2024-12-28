@@ -6,9 +6,9 @@ namespace WebApplication1.Mapper;
 
 public static class BookMapper
 {
-    public static BookDto BookToBookDto(this Book book, List<GenreDto> genres)
+    public static ReturnBookDto BookToBookDto(this Book book, List<GenreDto> genres)
     {
-        return new BookDto()
+        return new ReturnBookDto()
         {
             Author = book.Author,
             Availability = book.Availability,

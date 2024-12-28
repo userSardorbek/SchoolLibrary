@@ -5,8 +5,8 @@ namespace WebApplication1.Interfaces;
 
 public interface IBookRepository
 {
-    Task<BookDto?> GetByIdAsync(Guid id);
-    Task<BookDto?> CreateBook(BookCreateDto bookCreateDto);
-    Task<BookDto?> EditBook(Guid bookId, BookEditDto bookEditDto);
-    Task<BookDto?> DeleteBook(Guid bookId);
+    Task<ReturnBookDto?> GetByIdAsync(Guid id);
+    Task<ReturnBookDto?> CreateBook(BookCreateDto bookCreateDto);
+    Task<ReturnBookDto?> EditBook(Guid bookId, BookEditDto bookEditDto);
+    Task<ReturnBookDto?> DeleteBook(Guid bookId);
 }

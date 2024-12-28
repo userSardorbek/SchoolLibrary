@@ -2,7 +2,7 @@
 
 namespace WebApplication1.Dto.BookDto;
 
-public class BookDto
+public class ReturnBookDto
 {
     public Guid Id { get; set; }
     public string Title { get; set; }

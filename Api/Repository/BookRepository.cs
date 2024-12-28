@@ -17,10 +17,10 @@ public class BookRepository : IBookRepository
         _context = context;
     }
 
-    public async Task<BookDto?> GetByIdAsync(Guid id)
+    public async Task<ReturnBookDto?> GetByIdAsync(Guid id)
     {
         var modelBookDto = await _context.Books.Where(a => a.Id == id)
-            .Select(a => new BookDto()
+            .Select(a => new ReturnBookDto()
             {
                 Id = a.Id,
                 Author = a.Author,
@@ -36,7 +36,7 @@ public class BookRepository : IBookRepository
         return modelBookDto ?? null;
     }
 
-    public async Task<BookDto?> CreateBook(BookCreateDto createModel)
+    public async Task<ReturnBookDto?> CreateBook(BookCreateDto createModel)
     {
         var genresDto = new List<GenreDto>();
         var book = new Book() { Title = createModel.Title, Author = createModel.Author, ISBN = createModel.ISBN };
@@ -58,7 +58,7 @@ public class BookRepository : IBookRepository
         return book.BookToBookDto(genresDto);
     }
 
-    public async Task<BookDto?> EditBook(Guid bookId, BookEditDto model)
+    public async Task<ReturnBookDto?> EditBook(Guid bookId, BookEditDto model)
     {
         var book = await _context.Books.FindAsync(bookId);
         if (book == null)
@@ -84,7 +84,7 @@ public class BookRepository : IBookRepository
         return book.BookToBookDto(genresDto);
     }
 
-    public async Task<BookDto?> DeleteBook(Guid bookId)
+    public async Task<ReturnBookDto?> DeleteBook(Guid bookId)
     {
         var bookModel = await _context.Books.FindAsync(bookId);
         if (bookModel == null)

@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using WebApplication1.Data;
 using WebApplication1.Interfaces;
 using WebApplication1.Model;
+using WebApplication1.Repository;
 using WebApplication1.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -85,6 +86,8 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IBorrowRecordRepository, BorrowRecordRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
