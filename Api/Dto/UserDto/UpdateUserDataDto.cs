@@ -2,12 +2,10 @@
 
 namespace WebApplication1.Dto;
 
-public class RegisterDto
+public class UpdateUserDataDto
 {
     [Required]
     public string Username { get; set; }
-    [Required]
-    public string Password { get; set; }
     [Required]
     public string FullName { get; set; }
     [Required]

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Dto;
 using WebApplication1.Dto.BookDto;
 using WebApplication1.Interfaces;
@@ -21,6 +22,7 @@ public class BookController(IBookRepository iBookRepository) : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     [ProducesDefaultResponseType(typeof(ApiResponse<ReturnBookDto>))]
     public async Task<IActionResult> CreateBook([FromBody] BookCreateDto bookCreateDto)
     {

@@ -21,6 +21,12 @@ public class ApiResponse<T>
         Data = data;
         Success = true;
     }
+    public ApiResponse(T data, string error)
+    {
+        Data = data;
+        Success = true;
+        Error = error;
+    }
     
     [JsonPropertyName("success")]
     public bool Success { get; set; }

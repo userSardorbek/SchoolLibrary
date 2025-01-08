@@ -18,4 +18,17 @@ public class UserRepository : IUserRepository
     {
         return await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == username);
     }
+
+    public async Task<IList<string>?> GetRolesByUsername(string username)
+    {
+        var user = await _userManager.FindByNameAsync(username);
+
+        if (user == null)
+        {
+            return null; 
+        }
+
+        var roles = await _userManager.GetRolesAsync(user);
+        return roles;
+    }
 }

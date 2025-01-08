@@ -16,4 +16,6 @@ public class BorrowRecord
     public DateTime BorrowDate { get; set; } = DateTime.UtcNow;
 
     public DateTime ReturnDate { get; set; } = DateTime.UtcNow.AddDays(14);
+
+    public bool IsReturned { get; set; } = false;
 }

@@ -13,7 +13,8 @@ public static class BorrowRecordMapper
             UserId = model.UserId,
             BookId = model.BookId,
             BorrowDate = model.BorrowDate,
-            ReturnDate = model.ReturnDate
+            ReturnDate = model.ReturnDate,
+            isReturned = model.IsReturned
         };
     }
 }
