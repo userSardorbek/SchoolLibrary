@@ -11,13 +11,13 @@ public class TransactionHistory
     
     public List<Comment> Comments { get; set; } = [];
 
-    public string? UserId { get; set; }
-    public User? User { get; set; }
+    public string UserId { get; set; }
+    public User User { get; set; }
 
-    public string? LibrarianId { get; set; }
-    public User? Librarian { get; set; }
+    public string LibrarianId { get; set; }
+    public User Librarian { get; set; }
 
-    public Guid? BookId { get; set; }
-    public Book? Book { get; set; }
+    public Guid BookId { get; set; }
+    public Book Book { get; set; }
     
 }

@@ -9,4 +9,5 @@ public interface IBookRepository
     Task<ReturnBookDto?> CreateBook(BookCreateDto bookCreateDto);
     Task<ReturnBookDto?> EditBook(Guid bookId, BookEditDto bookEditDto);
     Task<ReturnBookDto?> DeleteBook(Guid bookId);
+    Task<bool> Exist(Guid guid);
 }

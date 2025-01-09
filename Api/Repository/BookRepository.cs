@@ -93,4 +93,9 @@ public class BookRepository : IBookRepository
         await _context.SaveChangesAsync();
         return bookModel.BookToBookDto(null);
     }
+
+    public async Task<bool> Exist(Guid guid)
+    {
+        return await _context.Books.AnyAsync(x => x.Id == guid);
+    }
 }

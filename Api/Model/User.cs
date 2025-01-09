@@ -8,6 +8,7 @@ namespace WebApplication1.Model;
 [Table("users")]
 [Index(nameof(Email), IsUnique = true)]
 [Index(nameof(UserName), IsUnique = true)]
+[Index(nameof(NormalizedEmail), IsUnique = true)]
 public class User : IdentityUser
 {
     [Required] 
